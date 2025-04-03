@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ product.name }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>{{ product.product_name }}</h2>
+        <p>💰 <strong>{{ product.product_price }}원</strong></p>
+        <p>{{ product.product_explain }}</p>
+
+        <a href="{%url 'edit' product.id %}"><button class="edit">수정</button></a>
+        <a href="{%url 'delete' product.id %}"><button class="delete">삭제</button></a>
+        <a href="{%url 'shop' %}"><button class="back">목록으로</button></a>
+    </div>
+    </body>
+</html>
