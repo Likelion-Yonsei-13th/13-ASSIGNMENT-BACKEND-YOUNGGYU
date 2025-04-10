@@ -1,28 +1,20 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>상품 수정</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-</head>
-<body>
-    <div class="container">
-        <h2>상품 수정</h2>
-        <form method="POST" action="{% url 'update' product.id %}">
-            {% csrf_token %}
-            <label>상품명:</label><br>
-            <input type="text" name="product_name" value = "{{product.product_name}}"><br><br>
-        
-            <label>상품 설명:</label><br>
-            <textarea name="product_explain" id ="">{{product.product_explain}}</textarea><br><br>
-        
-            <label>가격:</label><br>
-            <input type="number" name="product_price" value = "{{product.product_price}}"><br><br>
-        
-            <button type="submit">저장</button>
-        </form>
-        <a href="{%url 'shop' %}">← 목록으로</a>
-    </div>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h2>상품 수정</h2>
+    <form method="POST" action="{% url 'update' product.id %}">
+        {% csrf_token %}
+        <label>상품명:</label><br>
+        <input type="text" name="product_name" value="{{ product.product_name }}"><br><br>
+
+        <label>상품 설명:</label><br>
+        <textarea name="product_explain">{{ product.product_explain }}</textarea><br><br>
+
+        <label>가격:</label><br>
+        <input type="number" name="product_price" value="{{ product.product_price }}"><br><br>
+
+        <button type="submit">저장</button>
+    </form>
+    <a href="{% url 'shop' %}">← 목록으로</a>
+</div>
+{% endblock %}
