@@ -20,6 +20,6 @@ from ShopApp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.shop, name = "shop"),
-    path('shop/', include('ShopApp.urls')),
+    path('', include('ShopApp.urls')),
+    path('account/', include('accountApp.urls')),
 ]
