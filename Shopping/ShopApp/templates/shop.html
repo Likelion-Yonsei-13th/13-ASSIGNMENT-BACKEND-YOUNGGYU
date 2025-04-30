@@ -1,27 +1,23 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>상품 목록</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-</head>
-<body>
-    <div class="container">
-        <h2>🛍 상품 목록</h2>
-        <a href="{%url 'new' %}"><button class="create">+ 새 상품 등록</button></a>
-        <table>
-            <tr>
-                <th>상품명</th>
-                <th>가격</th>
-            </tr>
-            {% for product in products %}
-            <tr>
-                <td><a href="{%url 'detail' product.id %}">{{ product.summary }}</a></td>
-                <td>{{ product.product_price }}원</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h2>🛍 상품 목록</h2>
+    {% if request.user.is_authenticated %}
+        <a href="{% url 'new' %}">
+            <button class="create">+ 새 상품 등록</button>
+        </a>
+    {% endif %}
+    <table>
+        <tr>
+            <th>상품명</th>
+            <th>가격</th>
+        </tr>
+        {% for product in products %}
+        <tr>
+            <td><a href="{% url 'detail' product.id %}">{{ product.summary }}</a></td>
+            <td>{{ product.product_price }}원</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
