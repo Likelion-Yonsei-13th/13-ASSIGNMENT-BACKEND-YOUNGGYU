@@ -4,8 +4,11 @@ from .models import Shop
 
 # Create your views here.
 def shop(request):
-    products = Shop.objects.all()
-    return render(request,'shop.html', {'products' : products})
+    if request.user.is_authenticated:
+        products = Shop.objects.filter(user=request.user)
+    else:
+        products = [] 
+    return render(request, 'shop.html', {'products': products})
 
 def detail(request, id):
     product = get_object_or_404(Shop, pk =id)
@@ -16,6 +19,7 @@ def new(request):
 
 def create(request):
     new_product = Shop()
+    new_product.user=request.user
     new_product.product_name = request.POST['product_name']
     new_product.product_price = request.POST['product_price']
     new_product.product_explain = request.POST['product_explain']
